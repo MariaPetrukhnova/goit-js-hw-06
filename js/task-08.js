@@ -9,12 +9,15 @@ function onFormSubmit(event) {
 
     const userMail = formElements.email.value;
     const userPassword = formElements.password.value;
-
     const formData = {
         userMail,
         userPassword,
     };
-    console.log(formData);
+
+    userMail === '' || userPassword === ''
+    ? alert("All fields are required")
+    : console.log(formData);
+    
     event.currentTarget.reset();
 }
 
