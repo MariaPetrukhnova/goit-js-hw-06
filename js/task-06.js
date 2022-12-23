@@ -7,3 +7,8 @@ inputEl.addEventListener("blur", (event) => {
         ? inputEl.classList.add('valid')
         : inputEl.classList.add('invalid')
 });
+
+inputEl.addEventListener("focus", (event) => {
+    // event.currentTarget.value = '';
+    inputEl.classList.remove(...inputEl.classList);
+});
