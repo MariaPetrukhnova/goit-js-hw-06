@@ -1,6 +1,6 @@
-function getRandomHexColor() {
-  return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-}
+// function getRandomHexColor() {
+//   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+// }
 
 // Напиши скрипт створення і очищення колекції елементів. 
 // Користувач вводить кількість елементів в input і 
@@ -20,11 +20,11 @@ function getRandomHexColor() {
 // 2.	Кожен елемент після першого повинен бути ширшим і вищим від попереднього на 10px.
 // 3.	Всі елементи повинні мати випадковий колір фону у форматі HEX. 
 // Використовуй готову функцію getRandomHexColor для отримання кольору.
-// function getRandomHexColor() {
-//   return `#${Math.floor(Math.random() * 16777215)
-//     .toString(16)
-//     .padStart(6, 0)}`;
-// }
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
+}
 
 // Створи функцію destroyBoxes(), яка очищає вміст div#boxes,
 //   у такий спосіб видаляючи всі створені елементи.
@@ -32,19 +32,44 @@ function getRandomHexColor() {
 const enteredNum = document.querySelector('input[type="number"]');
 const btnCreateEl = document.querySelector('button[data-create]');
 const btnDestroyEl = document.querySelector('button[data-destroy]');
-const paretDiv = document.querySelector('#boxes');
+const parentDiv = document.querySelector('#boxes');
 
-function getNumber() {
-  enteredNum.addEventListener('input', (event) => {
-    const number = event.currentTarget.value;
-    return console.log(number);
-  });
+// function setNum() {
+//   enteredNum.addEventListener("input", (event) => {
+//     const number = `${event.currentTarget.value}`;
+//     return console.log(Number(number));
+//   });
+// }
+
+function createBoxes(amount) {
+  let tags = [];
+  let initialHeight = 20;
+  let initialWidth = 20;
+  for (let i = 0; i < amount; i++) {
+    const height = initialHeight += 10;
+    const width = initialWidth += 10;
+    const tag = document.createElement('div');
+    const randomColor = getRandomHexColor();
+    tag.style.backgroundColor = `${randomColor}`;
+    tag.style.height = `${height}px`;
+    tag.style.width = `${width}px`;
+    tags.push(tag);
+  }
+  return tags;
 }
-getNumber();
 
-createBoxes(amount) {
-  btnCreateEl.addEventListener('click', (event) => { }
-    
-    
+function addBoxes() {
+  destroyBoxes();
+  const tags = createBoxes(enteredNum.value);
+  parentDiv.append(...tags);
 }
 
+btnCreateEl.addEventListener('click', addBoxes);
+addBoxes(createBoxes);
+
+function destroyBoxes() {
+  parentDiv.innerHTML = "";
+}
+
+btnDestroyEl.addEventListener('click', destroyBoxes);
+// destroyBoxes();
